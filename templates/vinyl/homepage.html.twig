@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block title %} Welcome to Mixed Vinyl{% endblock %}
+{% block body %}
+<h1>{{ title }}</h1>
+
+{# TODO: add an image of the record #}
+
+<div>
+    <ul>
+        {% for track in tracks %}
+            <li>{{ track.songName }} - {{ track.artist|upper }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

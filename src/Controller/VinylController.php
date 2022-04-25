@@ -21,7 +21,7 @@ class VinylController extends AbstractController
           ['songName' => 'Black Betty', 'artist' => 'Ram Jam'],
           ['songName' => 'Das Elfte Gebot', 'artist' => 'Feuerschwanz']
         ];
-
+        dump($tracks);
         //first parameter is the name of the twig template, second parameter is an array of variables passed to the twig template
         return $this->render('vinyl/homepage.html.twig', [
             'title' => "DJ Toms Mega Collection",

@@ -2,16 +2,18 @@
 
 namespace App\Controller;
 
-use JetBrains\PhpStorm\NoReturn;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Environment;
 use function Symfony\Component\String\u;
 
 class VinylController extends AbstractController
 {
 
-    #[Route('/', name: 'homepage')]
+    #[Route('/', name: 'vinyl_homepage')]
     public function homepage(): Response
     {
         $tracks = [
@@ -29,17 +31,16 @@ class VinylController extends AbstractController
         ]);
     }
 
-    #[Route('/browse/{slug}', name: 'browse')]
-    public function browse(string $slug = null): Response
+    #[Route('/browse/{slug}', name: 'vinyl_browse')]
+    public function browse(Request $request, $_route, string $slug = null): Response
     {
-        if($slug) {
-            $title = u(str_replace('-', ' ', $slug))->title(true);
+        $test = $request->query->get('test');
+        if($test){
+            dump($request, $_route, $request->attributes);
         }
-        else {
-            $title = 'All Genres';
-        }
+        $genre = $slug ? u(str_replace('-', ' ', $slug))->title(true) : null;
 
-        return new Response('Genre: '.$title);
+        return $this->render('vinyl/browse.html.twig', ['genre'=>$genre]);
     }
 
 }
